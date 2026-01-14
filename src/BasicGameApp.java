@@ -38,11 +38,14 @@ public class BasicGameApp implements Runnable {
    public JPanel panel;
    
 	public BufferStrategy bufferStrategy;
+    public Image Background;
 	public Image ballPic;
+    public Image ronaldopic;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
-	private Ball ball;
+	private Ball bally;
+    private Player ronaldo;
 
 
    // Main method definition
@@ -60,11 +63,20 @@ public class BasicGameApp implements Runnable {
 	public BasicGameApp() {
       
       setUpGraphics();
+
+        //randomness
+        //(int)(math.random()* range) + offset
+        //range 0-9
+
+        
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
-		ballPic = Toolkit.getDefaultToolkit().getImage("Ball.png"); //load the picture
-		ball = new Ball(10,100);
+		ballPic = Toolkit.getDefaultToolkit().getImage("Ball.png");//load the picture
+        bally = new Ball(483,317);
+        ronaldopic = Toolkit.getDefaultToolkit().getImage("Ronaldo.jpg");
+		ronaldo = new Player(383,300);
+        Background = Toolkit.getDefaultToolkit().getImage("Soccerfield.jpeg");
 
 
 	}// BasicGameApp()
@@ -92,7 +104,8 @@ public class BasicGameApp implements Runnable {
 	public void moveThings()
 	{
       //calls the move( ) code in the objects
-		ball.move();
+		bally.move();
+        ronaldo.move();
 
 	}
 	
@@ -142,8 +155,11 @@ public class BasicGameApp implements Runnable {
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
-      //draw the image of the fish
-		g.drawImage(ballPic, ball.xpos, ball.ypos, ball.width, ball.height, null);
+      //draw the image of the field
+        g.drawImage(Background, 0, 0, WIDTH, HEIGHT, null);
+        g.drawImage(ballPic, bally.xpos, bally.ypos, bally.width, bally.height, null);
+        g.drawImage(ronaldopic, ronaldo.xpos, ronaldo.ypos, 75, 75, null);
+
 
 		g.dispose();
 

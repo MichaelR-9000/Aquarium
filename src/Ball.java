@@ -26,7 +26,7 @@ public class Ball {
     public Ball(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx =1;
+        dx =0;
         dy =0;
         width = 60;
         height = 60;
