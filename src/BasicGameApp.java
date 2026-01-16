@@ -74,6 +74,7 @@ public class BasicGameApp implements Runnable {
       //create (construct) the objects needed for the game and load up 
 		ballPic = Toolkit.getDefaultToolkit().getImage("Ball.png");//load the picture
         bally = new Ball(483,317);
+
         ronaldopic = Toolkit.getDefaultToolkit().getImage("Ronaldo.jpg");
 		ronaldo = new Player(383,300);
         Background = Toolkit.getDefaultToolkit().getImage("Soccerfield.jpeg");
@@ -106,8 +107,22 @@ public class BasicGameApp implements Runnable {
       //calls the move( ) code in the objects
 		bally.move();
         ronaldo.move();
+        Kicking();
 
 	}
+    public void Kicking(){
+
+        //if astros crash into eachother
+        if(bally.hitbox.intersects(ronaldo.hitbox)){
+            System.out.println("KICK");
+            bally.dx = -bally.dx-5;
+            bally.dy = -bally.dy-5;
+            ronaldo.dx = ronaldo.dx-2;
+            ronaldo.dy = ronaldo.dy-2;
+
+        }
+
+    }
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
    public void pause(int time ){

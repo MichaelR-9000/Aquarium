@@ -1,4 +1,4 @@
-
+import java.awt.*;
 
 public class Player {
 
@@ -10,6 +10,7 @@ public class Player {
     public int width;
     public int height;
     public boolean isAlive;//a boolean to denote if the hero is alive or dead.
+    public Rectangle hitbox;
 
     int randx = (int)(Math.random() * 10);
     int randy = (int)(Math.random() * 10)-3;
@@ -24,6 +25,7 @@ public class Player {
         width = 60;
         height = 60;
         isAlive = true;
+        hitbox = new Rectangle(xpos,ypos,width,height);
 
     }// constructor
 
