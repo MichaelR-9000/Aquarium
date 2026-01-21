@@ -117,8 +117,8 @@ public class BasicGameApp implements Runnable {
             System.out.println("KICK");
             bally.dx = -bally.dx-5;
             bally.dy = -bally.dy-5;
-            ronaldo.dx = ronaldo.dx-2;
-            ronaldo.dy = ronaldo.dy-2;
+            ronaldo.dx = ronaldo.dx/2;
+            ronaldo.dy = ronaldo.dy;
 
         }
 

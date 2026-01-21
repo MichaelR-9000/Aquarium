@@ -43,6 +43,26 @@ public class Ball {
     public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
+        if (xpos < 120) {//bounce off left wall
+
+
+            dx=-dx/2;
+
+        }
+        if (ypos < 20) { //bounce off top wall
+
+            dy=-dy/2;
+
+        }
+        if (xpos > 900-width) { //bounce off right  wall
+            dx=-dx/2;
+
+        }
+        if (ypos > 650-height) { //bounce off bottom wall
+            dy=-dy/2;
+
+        }
+        hitbox = new Rectangle(xpos,ypos,width,height);
  
     }
 }

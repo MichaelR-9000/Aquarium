@@ -52,6 +52,9 @@ public class Player {
 
         }
 
+        hitbox = new Rectangle(xpos,ypos,width,height);
+
+
 
     }
 
