@@ -41,11 +41,13 @@ public class BasicGameApp implements Runnable {
     public Image Background;
 	public Image ballPic;
     public Image ronaldopic;
+    public Image messipic;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Ball bally;
     private Player ronaldo;
+    private Player messi;
 
 
    // Main method definition
@@ -71,12 +73,16 @@ public class BasicGameApp implements Runnable {
         
        
       //variable and objects
-      //create (construct) the objects needed for the game and load up 
+      //create (construct) the objects needed for the game and load up
+        //Creates ball
 		ballPic = Toolkit.getDefaultToolkit().getImage("Ball.png");//load the picture
         bally = new Ball(483,317);
-
+//Creates Ronaldo
         ronaldopic = Toolkit.getDefaultToolkit().getImage("Ronaldo.jpg");
 		ronaldo = new Player(383,300);
+//Creates Messi
+        messipic = Toolkit.getDefaultToolkit().getImage("Messi.jpg");
+        messi = new Player(683,300);
         Background = Toolkit.getDefaultToolkit().getImage("Soccerfield.jpeg");
 
 
@@ -107,20 +113,36 @@ public class BasicGameApp implements Runnable {
       //calls the move( ) code in the objects
 		bally.move();
         ronaldo.move();
+        messi.move();
         Kicking();
 
 	}
-    public void Kicking(){
+    public void Kicking() {
 
         //if astros crash into eachother
-        if(bally.hitbox.intersects(ronaldo.hitbox)){
+        if (bally.hitbox.intersects(ronaldo.hitbox)) {
+
+            ronaldo.iskicking = true;
+
             System.out.println("KICK");
-            bally.dx = -bally.dx-5;
-            bally.dy = -bally.dy-5;
-            ronaldo.dx = ronaldo.dx/2;
-            ronaldo.dy = ronaldo.dy;
+            bally.dx = ronaldo.dx;
+            bally.dy = ronaldo.dy - 5;
+            ronaldo.dx = ronaldo.dx / 2;
+            ronaldo.dy = ronaldo.dy / 2;
+
 
         }
+        if (bally.hitbox.intersects(ronaldo.hitbox) && ronaldo.iskicking == true) {
+            ronaldo.iskicking = false;
+
+
+        }
+
+
+            if (!bally.hitbox.intersects(ronaldo.hitbox)) {
+                ronaldo.iskicking = true;
+
+            }
 
     }
 	

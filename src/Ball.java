@@ -46,12 +46,12 @@ public class Ball {
         if (xpos < 120) {//bounce off left wall
 
 
-            dx=-dx/2;
+            dx=-dx-2;
 
         }
         if (ypos < 20) { //bounce off top wall
 
-            dy=-dy/2;
+            dy=-dy;
 
         }
         if (xpos > 900-width) { //bounce off right  wall
@@ -62,7 +62,12 @@ public class Ball {
             dy=-dy/2;
 
         }
-        hitbox = new Rectangle(xpos,ypos,width,height);
+
+        if (xpos < 120 && ypos>100 && ypos<50) {//bounce off left wall
+
+            System.out.println("GOAL ON LEFT");
+
+        }hitbox = new Rectangle(xpos,ypos,width,height);
  
     }
 }

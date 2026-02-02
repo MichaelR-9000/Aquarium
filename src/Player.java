@@ -11,8 +11,9 @@ public class Player {
     public int height;
     public boolean isAlive;//a boolean to denote if the hero is alive or dead.
     public Rectangle hitbox;
+    public boolean iskicking;
 
-    int randx = (int)(Math.random() * 10);
+    int randx = (int)(Math.random() * 10)+1;
     int randy = (int)(Math.random() * 10)-3;
 
 
