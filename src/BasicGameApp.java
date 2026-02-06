@@ -35,7 +35,7 @@ public class BasicGameApp implements Runnable {
    //Declare the variables needed for the graphics
 	public JFrame frame;
 	public Canvas canvas;
-   public JPanel panel;
+    public JPanel panel;
    
 	public BufferStrategy bufferStrategy;
     public Image Background;
@@ -81,8 +81,8 @@ public class BasicGameApp implements Runnable {
         ronaldopic = Toolkit.getDefaultToolkit().getImage("Ronaldo.jpg");
 		ronaldo = new Player(383,300);
 //Creates Messi
-        messipic = Toolkit.getDefaultToolkit().getImage("Messi.jpg");
-        messi = new Player(683,300);
+        messipic = Toolkit.getDefaultToolkit().getImage("Messi.jpeg");
+        messi = new Player(583,300);
         Background = Toolkit.getDefaultToolkit().getImage("Soccerfield.jpeg");
 
 
@@ -115,6 +115,7 @@ public class BasicGameApp implements Runnable {
         ronaldo.move();
         messi.move();
         Kicking();
+        tackle();
 
 	}
     public void Kicking() {
@@ -125,8 +126,8 @@ public class BasicGameApp implements Runnable {
             ronaldo.iskicking = true;
 
             System.out.println("KICK");
-            bally.dx = ronaldo.dx;
-            bally.dy = ronaldo.dy - 5;
+            bally.dx = ronaldo.dx+2;
+            bally.dy = ronaldo.dy - 2;
             ronaldo.dx = ronaldo.dx / 2;
             ronaldo.dy = ronaldo.dy / 2;
 
@@ -142,7 +143,73 @@ public class BasicGameApp implements Runnable {
             if (!bally.hitbox.intersects(ronaldo.hitbox)) {
                 ronaldo.iskicking = true;
 
+            }//ronaldo kicking ball
+
+        if (bally.hitbox.intersects(messi.hitbox)) {
+
+            messi.iskicking = true;
+
+            System.out.println("KICK");
+            bally.dx = messi.dx;
+            bally.dy = messi.dy - 5;
+            messi.dx = messi.dx / 2;
+            messi.dy = messi.dy / 2;
+
+
+        }
+        if (ronaldo.hitbox.intersects(messi.hitbox) && messi.istackling == true) {
+            messi.istackling = false;
+        }
+        if (!ronaldo.hitbox.intersects(messi.hitbox)) {
+            messi.istackling = true;
+        }//messi kicking ball
+
+        if (messi.hitbox.intersects(ronaldo.hitbox) && ronaldo.istackling == true) {
+            ronaldo.istackling = false;
+        }
+        if (!messi.hitbox.intersects(ronaldo.hitbox)) {
+            ronaldo.istackling = true;
+        }
+
+
+    }
+
+    public void tackle(){
+        if (ronaldo.hitbox.intersects(messi.hitbox)) {
+            if (ronaldo.dx > messi.dx) {
+                messi.dx = ronaldo.dx + 1;
+                messi.dy = ronaldo.dy + 1;
+                ronaldo.dx = messi.dx / 2;
+                ronaldo.dy = messi.dy / 2;
+                ronaldo.istackling = true;
+                System.out.println("RONALDO TACKLES");
+
+
+
             }
+            if (ronaldo.dx < messi.dx) {
+                ronaldo.dx = messi.dx + 1;
+                ronaldo.dy = messi.dy + 1;
+                messi.dx = ronaldo.dx / 2;
+                messi.dy = ronaldo.dy / 2;
+
+                messi.istackling = true;
+
+                System.out.println("MESSI TACKLES");
+
+            }
+            if (bally.hitbox.intersects(messi.hitbox) && messi.iskicking == true) {
+                messi.iskicking = false;
+
+
+            }
+
+
+            if (!bally.hitbox.intersects(messi.hitbox)) {
+                messi.iskicking = true;
+
+            }
+        }
 
     }
 	
@@ -196,6 +263,7 @@ public class BasicGameApp implements Runnable {
         g.drawImage(Background, 0, 0, WIDTH, HEIGHT, null);
         g.drawImage(ballPic, bally.xpos, bally.ypos, bally.width, bally.height, null);
         g.drawImage(ronaldopic, ronaldo.xpos, ronaldo.ypos, 75, 75, null);
+        g.drawImage(messipic, messi.xpos, messi.ypos, 75, 75, null);
 
 
 		g.dispose();
