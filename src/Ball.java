@@ -46,7 +46,7 @@ public class Ball {
         if (xpos < 120) {//bounce off left wall
 
 
-            dx=-dx-2;
+            dx=-dx/2;
 
         }
         if (ypos < 20) { //bounce off top wall
