@@ -47,23 +47,35 @@ public class Ball {
 
 
             dx=-dx/2;
+            if (dx == 0 ){
+                dx=1;
+            }
 
         }
         if (ypos < 20) { //bounce off top wall
 
-            dy=-dy;
+            dy=-dy/2;
+            if (dy == 0 ){
+                dy=1;
+            }
 
         }
         if (xpos > 900-width) { //bounce off right  wall
             dx=-dx/2;
+            if (dx == 0 ){
+                dx=-1;
+            }
 
         }
         if (ypos > 650-height) { //bounce off bottom wall
             dy=-dy/2;
+            if (dy == 0 ){
+                dy=-1;
+            }
 
         }
 
-        if (xpos < 120 && ypos>100 && ypos<50) {//bounce off left wall
+        if (xpos < 120 && ypos>100 && ypos<50) {
 
             System.out.println("GOAL ON LEFT");
 

@@ -140,7 +140,7 @@ public class BasicGameApp implements Runnable {
         }
 
 
-            if (!bally.hitbox.intersects(ronaldo.hitbox)) {
+        if (!bally.hitbox.intersects(ronaldo.hitbox)) {
                 ronaldo.iskicking = true;
 
             }//ronaldo kicking ball
@@ -151,25 +151,19 @@ public class BasicGameApp implements Runnable {
 
             System.out.println("KICK");
             bally.dx = messi.dx;
-            bally.dy = messi.dy - 5;
+            bally.dy = messi.dy;
             messi.dx = messi.dx / 2;
             messi.dy = messi.dy / 2;
 
 
         }
-        if (ronaldo.hitbox.intersects(messi.hitbox) && messi.istackling == true) {
-            messi.istackling = false;
-        }
-        if (!ronaldo.hitbox.intersects(messi.hitbox)) {
-            messi.istackling = true;
-        }//messi kicking ball
 
-        if (messi.hitbox.intersects(ronaldo.hitbox) && ronaldo.istackling == true) {
-            ronaldo.istackling = false;
+
+        if (bally.hitbox.intersects(messi.hitbox) && messi.iskicking == true) {
+            messi.iskicking = false;
         }
-        if (!messi.hitbox.intersects(ronaldo.hitbox)) {
-            ronaldo.istackling = true;
-        }
+
+
 
 
     }
@@ -181,10 +175,9 @@ public class BasicGameApp implements Runnable {
                 messi.dy = ronaldo.dy + 1;
                 ronaldo.dx = messi.dx / 2;
                 ronaldo.dy = messi.dy / 2;
-                ronaldo.istackling = true;
+                messi.istackling = true;
+
                 System.out.println("RONALDO TACKLES");
-
-
 
             }
             if (ronaldo.dx < messi.dx) {
@@ -192,23 +185,25 @@ public class BasicGameApp implements Runnable {
                 ronaldo.dy = messi.dy + 1;
                 messi.dx = ronaldo.dx / 2;
                 messi.dy = ronaldo.dy / 2;
-
-                messi.istackling = true;
+                ronaldo.istackling = true;
 
                 System.out.println("MESSI TACKLES");
 
             }
-            if (bally.hitbox.intersects(messi.hitbox) && messi.iskicking == true) {
-                messi.iskicking = false;
+        }
 
+        if (ronaldo.hitbox.intersects(messi.hitbox) && messi.istackling == false) {
+            messi.istackling = true;
+        }
+        if (!ronaldo.hitbox.intersects(messi.hitbox)) {
+            messi.istackling = false;
+        }
 
-            }
-
-
-            if (!bally.hitbox.intersects(messi.hitbox)) {
-                messi.iskicking = true;
-
-            }
+        if (messi.hitbox.intersects(ronaldo.hitbox) && ronaldo.istackling == false) {
+            ronaldo.istackling = true;
+        }
+        if (!messi.hitbox.intersects(ronaldo.hitbox)) {
+            ronaldo.istackling = false;
         }
 
     }
