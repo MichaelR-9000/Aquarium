@@ -96,7 +96,7 @@ public class Ball {
             System.out.println("The score is "+scoreleft+" on left "+scoreright+" on right");
 
         }
-        if (xpos > 120 && ypos<275 && ypos > 375 && xpos < 780 && ypos < 275 && ypos > 375)
+        if (xpos > 120 && ypos<375 && ypos > 275 && xpos < 780)
         {
             isscoring = false;
         }

@@ -128,12 +128,13 @@ public class BasicGameApp implements Runnable {
         Kicking();
         tackle();
         win();
+        redcard();
 
 	}
 
     public void Kicking() {
 
-        //if astros crash into eachother
+        //if ball hits player
         if (bally.hitbox.intersects(ronaldo.hitbox) &&  ronaldo.iskicking == false) {
 
             ronaldo.iskicking = true;
@@ -220,7 +221,20 @@ public class BasicGameApp implements Runnable {
         }
 
 
+    }
+
+    public void redcard(){
+        if (ref.hitbox.intersects(messi.hitbox) && ref.isredcarding == false) {
+            messi.dx = -messi.dx;
+            messi.dy = -messi.dy;
+            ref.isredcarding = true;
+        }
+        if (!ref.hitbox.intersects(messi.hitbox)) {
+            ref.isredcarding = false;
+        }
         if (ref.hitbox.intersects(ronaldo.hitbox) && ref.isredcarding == false) {
+            ronaldo.dx = -ronaldo.dx;
+            ronaldo.dy = -ronaldo.dy;
             ref.isredcarding = true;
         }
         if (!ref.hitbox.intersects(ronaldo.hitbox)) {
@@ -229,18 +243,6 @@ public class BasicGameApp implements Runnable {
 
 
 
-
-
-
-
-        if (ref.hitbox.intersects(ronaldo.hitbox)){
-            ronaldo.dx = -ronaldo.dx;
-            ronaldo.dy = -bally.dy;
-        }
-        if (ref.hitbox.intersects(messi.hitbox)){
-            messi.dx = -messi.dx;
-            messi.dy = -messi.dy;
-        }
 
     }
 
@@ -338,7 +340,11 @@ public class BasicGameApp implements Runnable {
         if (bally.isleftwin == true){
             g.drawImage(ronaldopic, 0, 0, WIDTH, HEIGHT, null);
         }
-
+        g.setColor(Color.white);
+        g.fillRect(10,20,90,40);
+        g.setColor(Color.red);
+        g.drawString("Ronaldo:"+ bally.scoreleft, 10, 35);
+        g.drawString("Messi:"+ bally.scoreright, 10, 55);
 
 
         g.dispose();

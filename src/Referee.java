@@ -25,6 +25,7 @@ public class Referee {
         dy =randy;
         width = 60;
         height = 60;
+
         isAlive = true;
         hitbox = new Rectangle(xpos,ypos,width,height);
 

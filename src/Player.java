@@ -34,6 +34,13 @@ public class Player {
     public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
+        if (dx > 30){
+            dx=30;
+        }
+        if (dy > 30){
+            dy=30;
+        }
+
         if (xpos < 120) {//bounce off left wall
 
 
