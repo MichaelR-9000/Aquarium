@@ -42,12 +42,16 @@ public class BasicGameApp implements Runnable {
 	public Image ballPic;
     public Image ronaldopic;
     public Image messipic;
+    public Image refpic;
+    public Image Messiwin;
+    public Image Ronaldowin;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Ball bally;
     private Player ronaldo;
     private Player messi;
+    private Referee ref;
 
 
    // Main method definition
@@ -83,7 +87,13 @@ public class BasicGameApp implements Runnable {
 //Creates Messi
         messipic = Toolkit.getDefaultToolkit().getImage("Messi.jpeg");
         messi = new Player(583,300);
+        //background
         Background = Toolkit.getDefaultToolkit().getImage("Soccerfield.jpeg");
+        //referee
+        refpic = Toolkit.getDefaultToolkit().getImage("Ref.jpeg");
+        ref = new Referee(300,300);
+        Messiwin = Toolkit.getDefaultToolkit().getImage("MESSIWIN.jpg");
+        Ronaldowin = Toolkit.getDefaultToolkit().getImage("RONALDOWIN.jpg");
 
 
 	}// BasicGameApp()
@@ -114,10 +124,13 @@ public class BasicGameApp implements Runnable {
 		bally.move();
         ronaldo.move();
         messi.move();
+        ref.move();
         Kicking();
         tackle();
+        win();
 
 	}
+
     public void Kicking() {
 
         //if astros crash into eachother
@@ -206,6 +219,65 @@ public class BasicGameApp implements Runnable {
             ronaldo.istackling = false;
         }
 
+
+        if (ref.hitbox.intersects(ronaldo.hitbox) && ref.isredcarding == false) {
+            ref.isredcarding = true;
+        }
+        if (!ref.hitbox.intersects(ronaldo.hitbox)) {
+            ref.isredcarding = false;
+        }
+
+
+
+
+
+
+
+        if (ref.hitbox.intersects(ronaldo.hitbox)){
+            ronaldo.dx = -ronaldo.dx;
+            ronaldo.dy = -bally.dy;
+        }
+        if (ref.hitbox.intersects(messi.hitbox)){
+            messi.dx = -messi.dx;
+            messi.dy = -messi.dy;
+        }
+
+    }
+
+    public void win(){
+        if (bally.scoreright>5){
+            messi.dx = 0;
+            messi.dy = 0;
+            ronaldo.dx = 0;
+            messi.dx = 0;
+            ref.dx = 0;
+            ref.dy = 0;
+            bally.dy = 0;
+            bally.dx = 0;
+            System.out.println("MESSI WINS!!!");
+            bally.isrightwin = true;
+
+
+
+        }
+
+
+        if (bally.scoreleft>5){
+            messi.dx = 0;
+            messi.dy = 0;
+            ronaldo.dx = 0;
+            messi.dx = 0;
+            ref.dx = 0;
+            ref.dy = 0;
+            bally.dy = 0;
+            bally.dx = 0;
+            System.out.println("RONALDO WINS!!!");
+            bally.isleftwin = true;
+
+        }
+
+
+
     }
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
@@ -259,9 +331,17 @@ public class BasicGameApp implements Runnable {
         g.drawImage(ballPic, bally.xpos, bally.ypos, bally.width, bally.height, null);
         g.drawImage(ronaldopic, ronaldo.xpos, ronaldo.ypos, 75, 75, null);
         g.drawImage(messipic, messi.xpos, messi.ypos, 75, 75, null);
+        g.drawImage(refpic, ref.xpos, ref.ypos, 75,75, null);
+        if (bally.isrightwin == true){
+            g.drawImage(messipic, 0, 0, WIDTH, HEIGHT, null);
+        }
+        if (bally.isleftwin == true){
+            g.drawImage(ronaldopic, 0, 0, WIDTH, HEIGHT, null);
+        }
 
 
-		g.dispose();
+
+        g.dispose();
 
 		bufferStrategy.show();
 	}

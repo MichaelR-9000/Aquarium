@@ -19,6 +19,9 @@ public class Ball {
     public int scoreleft;
     public int scoreright;
     public boolean isscoring;
+    public boolean isrightwin;
+    public boolean isleftwin;
+
 
 
 
@@ -83,14 +86,14 @@ public class Ball {
             System.out.println("GOAL ON LEFT");
             isscoring = true;
             scoreleft = scoreleft+1;
-            System.out.println("The score is "+scoreleft+"on left "+scoreright+" on right");
+            System.out.println("The score is " +scoreleft+" on left "+scoreright+" on right");
 
         }
         if (xpos > 780 && ypos>275 && ypos < 375 && isscoring == false) {
             isscoring = true;
             System.out.println("GOAL ON RIGHT");
             scoreright = scoreright+1;
-            System.out.println("The score is "+scoreleft+"on left "+scoreright+" on right");
+            System.out.println("The score is "+scoreleft+" on left "+scoreright+" on right");
 
         }
         if (xpos > 120 && ypos<275 && ypos > 375 && xpos < 780 && ypos < 275 && ypos > 375)
@@ -98,6 +101,8 @@ public class Ball {
             isscoring = false;
         }
             hitbox = new Rectangle(xpos,ypos,width,height);
+
+
 
     }
 }
