@@ -55,10 +55,15 @@ public class Player {
         }
 
         hitbox = new Rectangle(xpos,ypos,width,height);
+        if (dx == 0 && dy == 0){
+            dx = 1;
+            dy = 1;
+        }
 
 
 
     }
+
 
 
 }

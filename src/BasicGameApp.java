@@ -121,45 +121,45 @@ public class BasicGameApp implements Runnable {
     public void Kicking() {
 
         //if astros crash into eachother
-        if (bally.hitbox.intersects(ronaldo.hitbox)) {
+        if (bally.hitbox.intersects(ronaldo.hitbox) &&  ronaldo.iskicking == false) {
 
             ronaldo.iskicking = true;
 
             System.out.println("KICK");
             bally.dx = ronaldo.dx+2;
             bally.dy = ronaldo.dy - 2;
-            ronaldo.dx = ronaldo.dx / 2;
-            ronaldo.dy = ronaldo.dy / 2;
+            ronaldo.dx = ronaldo.dx -1;
+            ronaldo.dy = ronaldo.dy -1;
 
 
         }
-        if (bally.hitbox.intersects(ronaldo.hitbox) && ronaldo.iskicking == true) {
-            ronaldo.iskicking = false;
+       // if (!bally.hitbox.intersects(ronaldo.hitbox) && ronaldo.iskicking == true) {
+            //ronaldo.iskicking = false;
 
 
-        }
+      //  }
 
 
         if (!bally.hitbox.intersects(ronaldo.hitbox)) {
-                ronaldo.iskicking = true;
+                ronaldo.iskicking = false;
 
             }//ronaldo kicking ball
 
-        if (bally.hitbox.intersects(messi.hitbox)) {
+        if (bally.hitbox.intersects(messi.hitbox) && messi.iskicking == false) {
 
             messi.iskicking = true;
 
             System.out.println("KICK");
             bally.dx = messi.dx;
             bally.dy = messi.dy;
-            messi.dx = messi.dx / 2;
-            messi.dy = messi.dy / 2;
+            messi.dx = messi.dx -1;
+            messi.dy = messi.dy -1;
 
 
         }
 
 
-        if (bally.hitbox.intersects(messi.hitbox) && messi.iskicking == true) {
+        if (!bally.hitbox.intersects(messi.hitbox)) {
             messi.iskicking = false;
         }
 
@@ -169,22 +169,22 @@ public class BasicGameApp implements Runnable {
     }
 
     public void tackle(){
-        if (ronaldo.hitbox.intersects(messi.hitbox)) {
+        if (ronaldo.hitbox.intersects(messi.hitbox) && messi.istackling == false) {
             if (ronaldo.dx > messi.dx) {
-                messi.dx = ronaldo.dx + 1;
-                messi.dy = ronaldo.dy + 1;
-                ronaldo.dx = messi.dx / 2;
-                ronaldo.dy = messi.dy / 2;
+                messi.dx = ronaldo.dx + 3;
+                messi.dy = ronaldo.dy + 3;
+                ronaldo.dx = messi.dx -2;
+                ronaldo.dy = messi.dy -2;
                 messi.istackling = true;
 
                 System.out.println("RONALDO TACKLES");
 
             }
             if (ronaldo.dx < messi.dx) {
-                ronaldo.dx = messi.dx + 1;
-                ronaldo.dy = messi.dy + 1;
-                messi.dx = ronaldo.dx / 2;
-                messi.dy = ronaldo.dy / 2;
+                ronaldo.dx = messi.dx + 3;
+                ronaldo.dy = messi.dy + 3;
+                messi.dx = ronaldo.dx -2;
+                messi.dy = ronaldo.dy -2;
                 ronaldo.istackling = true;
 
                 System.out.println("MESSI TACKLES");

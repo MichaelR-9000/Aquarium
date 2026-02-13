@@ -16,6 +16,9 @@ public class Ball {
     public int height;
     public boolean isAlive;//a boolean to denote if the hero is alive or dead.
     public Rectangle hitbox;
+    public int scoreleft;
+    public int scoreright;
+    public boolean isscoring;
 
 
 
@@ -75,12 +78,27 @@ public class Ball {
 
         }
 
-        if (xpos < 120 && ypos>100 && ypos<50) {
+        if (xpos < 120 && ypos>275 && ypos < 375 && isscoring == false) {
 
             System.out.println("GOAL ON LEFT");
+            isscoring = true;
+            scoreleft = scoreleft+1;
+            System.out.println("The score is "+scoreleft+"on left "+scoreright+" on right");
 
-        }hitbox = new Rectangle(xpos,ypos,width,height);
- 
+        }
+        if (xpos > 780 && ypos>275 && ypos < 375 && isscoring == false) {
+            isscoring = true;
+            System.out.println("GOAL ON RIGHT");
+            scoreright = scoreright+1;
+            System.out.println("The score is "+scoreleft+"on left "+scoreright+" on right");
+
+        }
+        if (xpos > 120 && ypos<275 && ypos > 375 && xpos < 780 && ypos < 275 && ypos > 375)
+        {
+            isscoring = false;
+        }
+            hitbox = new Rectangle(xpos,ypos,width,height);
+
     }
 }
 
