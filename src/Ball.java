@@ -81,7 +81,7 @@ public class Ball {
 
         }
 
-        if (xpos < 120 && ypos>275 && ypos < 375 && isscoring == false) {
+        if (xpos < 120 && ypos>275 && ypos < 375 && isscoring == false) {  //outputs statements for scoring
 
             System.out.println("GOAL ON LEFT");
             isscoring = true;

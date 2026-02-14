@@ -31,25 +31,25 @@ public class Referee {
 
     }// constructor
 
-    public void move() {
+    public void move() {        //referee will wrap
         xpos = xpos + dx;
         ypos = ypos + dy;
-        if (xpos < -100) {//bounce off left wall
+        if (xpos < -100) {
 
 
             xpos = 1000;
 
         }
-        if (ypos < -100) { //bounce off top wall
+        if (ypos < -100) {
 
             ypos = 900;
 
         }
-        if (xpos > 1000) { //bounce off right  wall
+        if (xpos > 1000) {
             xpos = -25;
 
         }
-        if (ypos > 1000) { //bounce off bottom wall
+        if (ypos > 1000) {
             ypos = -100;
 
         }

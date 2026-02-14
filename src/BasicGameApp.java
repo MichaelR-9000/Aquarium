@@ -38,7 +38,7 @@ public class BasicGameApp implements Runnable {
     public JPanel panel;
    
 	public BufferStrategy bufferStrategy;
-    public Image Background;
+    public Image Background;        //images for objects
 	public Image ballPic;
     public Image ronaldopic;
     public Image messipic;
@@ -48,7 +48,7 @@ public class BasicGameApp implements Runnable {
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
-	private Ball bally;
+	private Ball bally;         //different objects
     private Player ronaldo;
     private Player messi;
     private Referee ref;
@@ -94,6 +94,7 @@ public class BasicGameApp implements Runnable {
         ref = new Referee(300,300);
         Messiwin = Toolkit.getDefaultToolkit().getImage("MESSIWIN.jpg");
         Ronaldowin = Toolkit.getDefaultToolkit().getImage("RONALDOWIN.jpg");
+        //win screens for ronaldo and messi
 
 
 	}// BasicGameApp()
@@ -134,7 +135,7 @@ public class BasicGameApp implements Runnable {
 
     public void Kicking() {
 
-        //if ball hits player
+        //if ball hits player. Ball gains the player's direction and gains speed, player loses speed
         if (bally.hitbox.intersects(ronaldo.hitbox) &&  ronaldo.iskicking == false) {
 
             ronaldo.iskicking = true;
@@ -147,11 +148,7 @@ public class BasicGameApp implements Runnable {
 
 
         }
-       // if (!bally.hitbox.intersects(ronaldo.hitbox) && ronaldo.iskicking == true) {
-            //ronaldo.iskicking = false;
 
-
-      //  }
 
 
         if (!bally.hitbox.intersects(ronaldo.hitbox)) {
@@ -159,7 +156,7 @@ public class BasicGameApp implements Runnable {
 
             }//ronaldo kicking ball
 
-        if (bally.hitbox.intersects(messi.hitbox) && messi.iskicking == false) {
+        if (bally.hitbox.intersects(messi.hitbox) && messi.iskicking == false) {        //messi kicking ball
 
             messi.iskicking = true;
 
@@ -181,7 +178,7 @@ public class BasicGameApp implements Runnable {
 
 
     }
-
+//if players interact with eachother. Gain or lose speed depending on who's faster initially
     public void tackle(){
         if (ronaldo.hitbox.intersects(messi.hitbox) && messi.istackling == false) {
             if (ronaldo.dx > messi.dx) {
@@ -206,6 +203,8 @@ public class BasicGameApp implements Runnable {
             }
         }
 
+
+//specifying conditions for tackle
         if (ronaldo.hitbox.intersects(messi.hitbox) && messi.istackling == false) {
             messi.istackling = true;
         }
@@ -222,7 +221,7 @@ public class BasicGameApp implements Runnable {
 
 
     }
-
+//if ref interacts with player. player's direction will reverse
     public void redcard(){
         if (ref.hitbox.intersects(messi.hitbox) && ref.isredcarding == false) {
             messi.dx = -messi.dx;
@@ -245,9 +244,9 @@ public class BasicGameApp implements Runnable {
 
 
     }
-
+//code for win screen Messi
     public void win(){
-        if (bally.scoreright>5){
+        if (bally.scoreright>3){
             messi.dx = 0;
             messi.dy = 0;
             ronaldo.dx = 0;
@@ -263,8 +262,8 @@ public class BasicGameApp implements Runnable {
 
         }
 
-
-        if (bally.scoreleft>5){
+//code for win screen Ronaldo
+        if (bally.scoreleft>3){
             messi.dx = 0;
             messi.dy = 0;
             ronaldo.dx = 0;
@@ -334,12 +333,19 @@ public class BasicGameApp implements Runnable {
         g.drawImage(ronaldopic, ronaldo.xpos, ronaldo.ypos, 75, 75, null);
         g.drawImage(messipic, messi.xpos, messi.ypos, 75, 75, null);
         g.drawImage(refpic, ref.xpos, ref.ypos, 75,75, null);
-        if (bally.isrightwin == true){
+        if (bally.isrightwin == true){  //makes win screen for messi victory
             g.drawImage(messipic, 0, 0, WIDTH, HEIGHT, null);
+            g.fillRect(10,20,90,40);
+            g.setColor(Color.red);
+            g.drawString("MESSI WINS", 10, 35);
         }
-        if (bally.isleftwin == true){
+        if (bally.isleftwin == true){  //makes win screen for Ronaldo victory
             g.drawImage(ronaldopic, 0, 0, WIDTH, HEIGHT, null);
+            g.fillRect(10,20,90,40);
+            g.setColor(Color.red);
+            g.drawString("RONALDO WINS", 10, 35);
         }
+        //makes score
         g.setColor(Color.white);
         g.fillRect(10,20,90,40);
         g.setColor(Color.red);
