@@ -13,16 +13,21 @@
 
 //Graphics Libraries
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
-import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.event.KeyListener;
+import java.awt.*;
+
 
 
 //*******************************************************************************
 // Class Definition Section
 
-public class BasicGameApp implements Runnable {
+public class BasicGameApp implements Runnable, KeyListener, MouseListener{
 
    //Variable Definition Section
    //Declare the variables used in the program 
@@ -246,7 +251,7 @@ public class BasicGameApp implements Runnable {
     }
 //code for win screen Messi
     public void win(){
-        if (bally.scoreright>3){
+        if (bally.scoreright>2){
             messi.dx = 0;
             messi.dy = 0;
             ronaldo.dx = 0;
@@ -263,7 +268,7 @@ public class BasicGameApp implements Runnable {
         }
 
 //code for win screen Ronaldo
-        if (bally.scoreleft>3){
+        if (bally.scoreleft>2){
             messi.dx = 0;
             messi.dy = 0;
             ronaldo.dx = 0;
@@ -306,7 +311,9 @@ public class BasicGameApp implements Runnable {
       canvas.setIgnoreRepaint(true);
    
       panel.add(canvas);  // adds the canvas to the panel.
-   
+       canvas.addKeyListener(this);
+       // add mouse motion to canvas
+       canvas.addMouseListener(this);
       // frame operations
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  //makes the frame close and exit nicely
       frame.pack();  //adjusts the frame and its contents so the sizes are at their default or larger
@@ -357,4 +364,81 @@ public class BasicGameApp implements Runnable {
 
 		bufferStrategy.show();
 	}
+    public void keyPressed(KeyEvent e) {
+
+        System.out.println(e.getKeyCode());
+
+        if (e.getKeyCode() == 87) {
+            System.out.println("going up");
+            ronaldo.isUP = true;
+        }
+        if (e.getKeyCode() == 83) {
+            System.out.println("going down");
+            ronaldo.isDown = true;
+        }
+
+
+        if (e.getKeyCode() == 68) {
+            System.out.println("going east");
+            ronaldo.isRight = true;
+        }
+        if (e.getKeyCode() == 65) {
+            System.out.println("going west");
+            ronaldo.isLeft = true;
+        }
+
+
+    }
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) { // Stop character movement
+        System.out.println(e.getKeyCode());
+
+        if (e.getKeyCode() == 87) {
+            System.out.println("not going up");
+            ronaldo.isUP = false;
+        }
+        if (e.getKeyCode() == 83) {
+            System.out.println("not going down");
+            ronaldo.isDown = false;
+        }
+        if (e.getKeyCode() == 68) {
+            System.out.println("not going east");
+            ronaldo.isRight = false;
+        }
+        if (e.getKeyCode() == 65) {
+            System.out.println("not going west");
+            ronaldo.isLeft = false;
+        }
+
+    }
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        System.out.println("mouse entered the screen");
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }
