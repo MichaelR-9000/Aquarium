@@ -45,7 +45,7 @@ public class Player {
         if(isUP == true){
             dy = -10;
         }
-        if(isUP == false && isDown == false){
+        if(!isUP && isDown == false){
             dy = 0;
         }
         if(isDown == true){
