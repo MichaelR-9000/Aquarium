@@ -12,6 +12,8 @@
 //import java.awt.Canvas;
 
 //Graphics Libraries
+
+//NOTES: MAKE THING TO CONTROL POWER OF KICK, Soft, Medium, and Heavy Kicks
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -369,22 +371,33 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
         System.out.println(e.getKeyCode());
 
         if (e.getKeyCode() == 87) {
-            System.out.println("going up");
             ronaldo.isUP = true;
         }
         if (e.getKeyCode() == 83) {
-            System.out.println("going down");
             ronaldo.isDown = true;
         }
 
-
         if (e.getKeyCode() == 68) {
-            System.out.println("going east");
             ronaldo.isRight = true;
         }
         if (e.getKeyCode() == 65) {
-            System.out.println("going west");
             ronaldo.isLeft = true;
+        }
+
+
+        if (e.getKeyCode() == 38) {
+            messi.isUP = true;
+        }
+        if (e.getKeyCode() == 40) {
+            messi.isDown = true;
+        }
+
+
+        if (e.getKeyCode() == 39) {
+            messi.isRight = true;
+        }
+        if (e.getKeyCode() == 37) {
+            messi.isLeft = true;
         }
 
 
@@ -413,6 +426,21 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
         if (e.getKeyCode() == 65) {
             System.out.println("not going west");
             ronaldo.isLeft = false;
+        }
+
+        if (e.getKeyCode() == 38) {
+            messi.isUP = false;
+        }
+        if (e.getKeyCode() == 40) {
+            messi.isDown = false;
+        }
+
+
+        if (e.getKeyCode() == 39) {
+            messi.isRight = false;
+        }
+        if (e.getKeyCode() == 37) {
+            messi.isLeft = false;
         }
 
     }

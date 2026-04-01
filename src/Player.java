@@ -63,20 +63,20 @@ public class Player {
             dx = 0;
         }
 
-        if (xpos < 0) { //bounce off left wall
-            dx = -dx;
+        if (xpos < 155) { //bounce off left wall
+            xpos = 160;
 
         }
-        if (ypos < 0) { //bounce off top wall
-            dy = -dy;
+        if (ypos < 60) { //bounce off top wall
+            ypos = 65;
 
         }
-        if (xpos > 1000-width) { //bounce off right  wall
-            dx = -dx;
+        if (xpos > 795) { //bounce off right  wall
+            xpos = 790;
 
         }
-        if (ypos > 700-height) { //bounce off bottom wall
-            dy = -dy;
+        if (ypos > 610-height) { //bounce off bottom wall
+            ypos = 550;
 
         }
 
