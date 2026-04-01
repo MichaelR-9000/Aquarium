@@ -17,49 +17,53 @@ public class Player {
     public boolean isDown;
     public boolean isRight;
     public boolean isLeft;
+    public boolean ishuge;
+    public boolean istiny;
 
-    int randx = (int)(Math.random() * 10)+1;
-    int randy = (int)(Math.random() * 10)-3;
-
+    int randx = (int) (Math.random() * 10) + 1;
+    int randy = (int) (Math.random() * 10) - 3;
 
 
     public Player(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx =randx;
-        dy =randy;
+        dx = randx;
+        dy = randy;
         width = 60;
         height = 60;
         isAlive = true;
-        hitbox = new Rectangle(xpos,ypos,width,height);
+        hitbox = new Rectangle(xpos, ypos, width, height);
         isUP = false;
         isDown = false;
         isRight = false;
         isLeft = false;
+        //Size
+        ishuge = false;
+        istiny = false;
 
 
     }// constructor
 
     public void move() {
 
-        if(isUP == true){
+        if (isUP == true) {
             dy = -10;
         }
-        if(!isUP && isDown == false){
+        if (!isUP && isDown == false) {
             dy = 0;
         }
-        if(isDown == true){
+        if (isDown == true) {
             dy = 10;
         }
 
 
-        if(isRight == true){
+        if (isRight == true) {
             dx = 10;
         }
-        if(isLeft == true){
+        if (isLeft == true) {
             dx = -10;
         }
-        if(isRight == false && isLeft == false){
+        if (isRight == false && isLeft == false) {
             dx = 0;
         }
 
@@ -75,21 +79,26 @@ public class Player {
             xpos = 790;
 
         }
-        if (ypos > 610-height) { //bounce off bottom wall
+        if (ypos > 610 - height) { //bounce off bottom wall
             ypos = 550;
 
         }
 
-        xpos = xpos + dx;
-        ypos = ypos + dy;
+
+            xpos = xpos + dx;
+            ypos = ypos + dy;
 
 
-        hitbox = new Rectangle(xpos,ypos,width,height);
+            hitbox = new Rectangle(xpos, ypos, width, height);
+        }
 
+        public void scale(){
+        if (istiny = true){
 
+        }
 
     }
 
 
+    }
 
-}

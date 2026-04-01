@@ -138,6 +138,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
         win();
         redcard();
 
+
+
 	}
 
     public void Kicking() {
@@ -339,8 +341,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
       //draw the image of the field
         g.drawImage(Background, 0, 0, WIDTH, HEIGHT, null);
         g.drawImage(ballPic, bally.xpos, bally.ypos, bally.width, bally.height, null);
-        g.drawImage(ronaldopic, ronaldo.xpos, ronaldo.ypos, 75, 75, null);
-        g.drawImage(messipic, messi.xpos, messi.ypos, 75, 75, null);
+        g.drawImage(ronaldopic, ronaldo.xpos, ronaldo.ypos, ronaldo.width, ronaldo.height, null);
+        g.drawImage(messipic, messi.xpos, messi.ypos, messi.width, messi.height, null);
         g.drawImage(refpic, ref.xpos, ref.ypos, 75,75, null);
         if (bally.isrightwin == true){  //makes win screen for messi victory
             g.drawImage(messipic, 0, 0, WIDTH, HEIGHT, null);
@@ -369,6 +371,27 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
     public void keyPressed(KeyEvent e) {
 
         System.out.println(e.getKeyCode());
+
+        if (e.getKeyCode() == 50) {
+            ronaldo.width =75;
+            ronaldo.height =75;
+            ronaldo.istiny = false;
+            ronaldo.ishuge = false;
+        }
+        if (e.getKeyCode() == 49) {
+            ronaldo.istiny = true;
+            ronaldo.ishuge = false;
+            System.out.println("RONALDO IS TINY");
+        }
+
+        if (e.getKeyCode() == 51) {
+            ronaldo.ishuge = true;
+            ronaldo.istiny = false;
+
+            System.out.println("RONALDO IS HUGE");
+        }
+
+
 
         if (e.getKeyCode() == 87) {
             ronaldo.isUP = true;
