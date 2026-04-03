@@ -47,42 +47,74 @@ public class Player {
     public void move() {
 
         if (isUP == true) {
-            dy = -10;
+            if (ishuge == true) {
+                dy = -4;
+            }
+            if (istiny == true) {
+                dy = -20;
+            }
+            if (istiny == false && ishuge == false){
+                dy = -10;
+            }
         }
-        if (!isUP && isDown == false) {
-            dy = 0;
-        }
-        if (isDown == true) {
-            dy = 10;
-        }
+            if (!isUP && isDown == false) {
+                dy = 0;
+            }
+            if (isDown == true) {
+                if (ishuge == true) {
+                    dy = 4;
+                }
+                if (istiny == true) {
+                    dy = 20;
+                }
+                if (istiny == false && ishuge == false){
+                    dy = 10;
+                }
+            }
 
 
-        if (isRight == true) {
-            dx = 10;
-        }
-        if (isLeft == true) {
-            dx = -10;
-        }
-        if (isRight == false && isLeft == false) {
-            dx = 0;
-        }
+            if (isRight == true) {
+                if (ishuge == true) {
+                    dx = 4;
+                }
+                if (istiny == true) {
+                    dx = 20;
+                }
+                if (istiny == false && ishuge == false){
+                    dx = 10;
+                }
+            }
+            if (isLeft == true) {
+                if (ishuge == true) {
+                    dx = -4;
+                }
+                if (istiny == true) {
+                    dx = -20;
+                }
+                if (istiny == false && ishuge == false){
+                    dx = -10;
+                }
+            }
+            if (isRight == false && isLeft == false) {
+                dx = 0;
+            }
 
-        if (xpos < 155) { //bounce off left wall
-            xpos = 160;
+            if (xpos < 155) { //bounce off left wall
+                xpos = 160;
 
-        }
-        if (ypos < 60) { //bounce off top wall
-            ypos = 65;
+            }
+            if (ypos < 60) { //bounce off top wall
+                ypos = 65;
 
-        }
-        if (xpos > 795) { //bounce off right  wall
-            xpos = 790;
+            }
+            if (xpos > 795) { //bounce off right  wall
+                xpos = 790;
 
-        }
-        if (ypos > 610 - height) { //bounce off bottom wall
-            ypos = 550;
+            }
+            if (ypos > 610 - height) { //bounce off bottom wall
+                ypos = 550;
 
-        }
+            }
 
 
             xpos = xpos + dx;
@@ -92,13 +124,23 @@ public class Player {
             hitbox = new Rectangle(xpos, ypos, width, height);
         }
 
-        public void scale(){
-        if (istiny = true){
+        public void scale () {
+            if (istiny == true) {
+                width = 35;
+                height = 35;
+                dx = 30;
+                dy = 30;
+            }
+            if (ishuge == true) {
+                width = 100;
+                height = 100;
+                dx = 2;
+                dy = 2;
+            }
 
         }
 
-    }
-
 
     }
+
 

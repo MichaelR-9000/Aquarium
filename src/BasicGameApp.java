@@ -137,6 +137,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
         tackle();
         win();
         redcard();
+        ronaldo.scale();
+        messi.scale();
 
 
 
@@ -150,8 +152,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
             ronaldo.iskicking = true;
 
             System.out.println("KICK");
-            bally.dx = ronaldo.dx+2;
-            bally.dy = ronaldo.dy - 2;
+            bally.dx = ronaldo.dx;
+            bally.dy = ronaldo.dy;
             ronaldo.dx = ronaldo.dx -1;
             ronaldo.dy = ronaldo.dy -1;
 
@@ -373,10 +375,11 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
         System.out.println(e.getKeyCode());
 
         if (e.getKeyCode() == 50) {
-            ronaldo.width =75;
-            ronaldo.height =75;
+            ronaldo.width =60;
+            ronaldo.height =60;
             ronaldo.istiny = false;
             ronaldo.ishuge = false;
+            System.out.println("medium");
         }
         if (e.getKeyCode() == 49) {
             ronaldo.istiny = true;
