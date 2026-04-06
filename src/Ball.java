@@ -89,7 +89,7 @@ public class Ball {
             System.out.println("The score is " +scoreleft+" on left "+scoreright+" on right");
 
         }
-        if (xpos > 780 && ypos>275 && ypos < 375 && isscoring == false) {
+        if (xpos > 820 && ypos>275 && ypos < 375 && isscoring == false) {
             isscoring = true;
             System.out.println("GOAL ON RIGHT");
             scoreleft = scoreleft+1;
