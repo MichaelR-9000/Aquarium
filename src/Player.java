@@ -19,6 +19,7 @@ public class Player {
     public boolean isLeft;
     public boolean ishuge;
     public boolean istiny;
+    public boolean isSprint;
 
     int randx = (int) (Math.random() * 10) + 1;
     int randy = (int) (Math.random() * 10) - 3;
@@ -47,53 +48,53 @@ public class Player {
     public void move() {
 
         if (isUP == true) {
-            if (ishuge == true) {
+            /*if (ishuge == true) {
                 dy = -4;
             }
             if (istiny == true) {
                 dy = -20;
             }
-            if (istiny == false && ishuge == false){
+            if (istiny == false && ishuge == false){*/
                 dy = -10;
             }
-        }
+
             if (!isUP && isDown == false) {
                 dy = 0;
             }
             if (isDown == true) {
-                if (ishuge == true) {
+                /*if (ishuge == true) {
                     dy = 4;
                 }
                 if (istiny == true) {
                     dy = 20;
                 }
-                if (istiny == false && ishuge == false){
+                if (istiny == false && ishuge == false){*/
                     dy = 10;
-                }
+
             }
 
 
             if (isRight == true) {
-                if (ishuge == true) {
+                /*if (ishuge == true) {
                     dx = 4;
                 }
                 if (istiny == true) {
                     dx = 20;
                 }
-                if (istiny == false && ishuge == false){
+                if (istiny == false && ishuge == false){*/
                     dx = 10;
-                }
+
             }
             if (isLeft == true) {
-                if (ishuge == true) {
+                /*if (ishuge == true) {
                     dx = -4;
                 }
                 if (istiny == true) {
                     dx = -20;
                 }
-                if (istiny == false && ishuge == false){
+                if (istiny == false && ishuge == false){*/
                     dx = -10;
-                }
+
             }
             if (isRight == false && isLeft == false) {
                 dx = 0;

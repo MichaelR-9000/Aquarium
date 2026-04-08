@@ -337,64 +337,90 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
 
 	//paints things on the screen using bufferStrategy
 	private void render() {
-		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-		g.clearRect(0, 0, WIDTH, HEIGHT);
+        Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
+        g.clearRect(0, 0, WIDTH, HEIGHT);
 
-      //draw the image of the field
+        //draw the image of the field
         g.drawImage(Background, 0, 0, WIDTH, HEIGHT, null);
         g.drawImage(ballPic, bally.xpos, bally.ypos, bally.width, bally.height, null);
         g.drawImage(ronaldopic, ronaldo.xpos, ronaldo.ypos, ronaldo.width, ronaldo.height, null);
         g.drawImage(messipic, messi.xpos, messi.ypos, messi.width, messi.height, null);
-        g.drawImage(refpic, ref.xpos, ref.ypos, 75,75, null);
-        if (bally.isrightwin == true){  //makes win screen for messi victory
+        g.drawImage(refpic, ref.xpos, ref.ypos, 75, 75, null);
+        if (bally.isrightwin == true) {  //makes win screen for messi victory
             g.drawImage(messipic, 0, 0, WIDTH, HEIGHT, null);
-            g.fillRect(10,20,90,40);
+            g.fillRect(10, 20, 90, 40);
             g.setColor(Color.red);
             g.drawString("MESSI WINS", 10, 35);
         }
-        if (bally.isleftwin == true){  //makes win screen for Ronaldo victory
+        if (bally.isleftwin == true) {  //makes win screen for Ronaldo victory
             g.drawImage(ronaldopic, 0, 0, WIDTH, HEIGHT, null);
-            g.fillRect(10,20,90,40);
+            g.fillRect(10, 20, 90, 40);
             g.setColor(Color.red);
             g.drawString("RONALDO WINS", 10, 35);
         }
         //makes score
         g.setColor(Color.white);
-        g.fillRect(10,20,90,40);
+        g.fillRect(10, 20, 90, 40);
         g.setColor(Color.red);
-        g.drawString("Ronaldo:"+ bally.scoreleft, 10, 35);
-        g.drawString("Messi:"+ bally.scoreright, 10, 55);
+        g.drawString("Ronaldo:" + bally.scoreleft, 10, 35);
+        g.drawString("Messi:" + bally.scoreright, 10, 55);
+
+        //make stamina bars
+
+        int RonStam;
+        int MesStam;
+
+        RonStam = 130;
+        if (ronaldo.isSprint == true) {
+            RonStam = RonStam - 12;
+        }
+
+            //Ronaldo Stamina
+            g.setColor(Color.white);
+            g.fillRect(60, 640, 140, 30);
+            g.setColor(Color.red);
+            g.fillRect(64, 645, RonStam, 20);
+
+            //Messi Stamina
+            g.setColor(Color.white);
+            g.fillRect(820, 642, 140, 30);
+            g.setColor(Color.red);
+            g.fillRect(825, 647, 130, 20);
 
 
-        g.dispose();
+            g.dispose();
 
-		bufferStrategy.show();
-	}
+            bufferStrategy.show();
+
+    }
     public void keyPressed(KeyEvent e) {
 
         System.out.println(e.getKeyCode());
 
-        if (e.getKeyCode() == 50) {
+        /*if (e.getKeyCode() == 50) {
             ronaldo.width =60;
             ronaldo.height =60;
             ronaldo.istiny = false;
             ronaldo.ishuge = false;
             System.out.println("medium");
-        }
-        if (e.getKeyCode() == 49) {
+        }*/
+        /*if (e.getKeyCode() == 49) {
             ronaldo.istiny = true;
             ronaldo.ishuge = false;
             System.out.println("RONALDO IS TINY");
-        }
+        }*/
 
-        if (e.getKeyCode() == 51) {
+        /*if (e.getKeyCode() == 51) {
             ronaldo.ishuge = true;
             ronaldo.istiny = false;
 
             System.out.println("RONALDO IS HUGE");
+        }*/
+
+        if (e.getKeyCode() == 16) {
+            System.out.println("Ronaldo Sprinting");
+            ronaldo.isSprint = true;
         }
-
-
 
         if (e.getKeyCode() == 87) {
             ronaldo.isUP = true;
@@ -436,6 +462,11 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
     @Override
     public void keyReleased(KeyEvent e) { // Stop character movement
         System.out.println(e.getKeyCode());
+
+        if (e.getKeyCode() == 16) {
+            System.out.println("Ronaldo Sprinting");
+            ronaldo.isSprint = false;
+        }
 
         if (e.getKeyCode() == 87) {
             System.out.println("not going up");

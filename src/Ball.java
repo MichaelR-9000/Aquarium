@@ -54,7 +54,7 @@ public class Ball {
 
             dx=-dx/2;
             if (dx == 0 ){
-                dx=1;
+                dx=2;
             }
 
         }
@@ -62,21 +62,21 @@ public class Ball {
 
             dy=-dy/2;
             if (dy == 0 ){
-                dy=1;
+                dy=2;
             }
 
         }
         if (xpos > 900-width) { //bounce off right  wall
             dx=-dx/2;
             if (dx == 0 ){
-                dx=-1;
+                dx=-2;
             }
 
         }
         if (ypos > 650-height) { //bounce off bottom wall
             dy=-dy/2;
             if (dy == 0 ){
-                dy=-1;
+                dy=-2;
             }
 
         }
