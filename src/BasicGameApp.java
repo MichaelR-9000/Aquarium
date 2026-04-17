@@ -23,6 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.event.KeyListener;
 import java.awt.*;
+import java.time.*;
 
 
 
@@ -425,6 +426,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
             messi.isSprinting = true;
             messi.Stamina = messi.Stamina - 40;
             messi.dx = 20;
+
 
         }
 
