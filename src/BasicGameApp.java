@@ -367,25 +367,21 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
 
         //make stamina bars
 
-        int RonStam;
-        int MesStam;
 
-        RonStam = 130;
-        if (ronaldo.isSprint == true) {
-            RonStam = RonStam - 12;
-        }
+
+
 
             //Ronaldo Stamina
             g.setColor(Color.white);
             g.fillRect(60, 640, 140, 30);
             g.setColor(Color.red);
-            g.fillRect(64, 645, RonStam, 20);
+            g.fillRect(64, 645, ronaldo.Stamina, 20);
 
             //Messi Stamina
             g.setColor(Color.white);
             g.fillRect(820, 642, 140, 30);
             g.setColor(Color.red);
-            g.fillRect(825, 647, 130, 20);
+            g.fillRect(825, 647, messi.Stamina, 20);
 
 
             g.dispose();
@@ -419,7 +415,17 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
 
         if (e.getKeyCode() == 16) {
             System.out.println("Ronaldo Sprinting");
-            ronaldo.isSprint = true;
+            ronaldo.isSprinting = true;
+            ronaldo.Stamina = ronaldo.Stamina - 40;
+            ronaldo.dx = 20;
+
+        }
+        if (e.getKeyCode() == 18) {
+            System.out.println("Messi Sprinting");
+            messi.isSprinting = true;
+            messi.Stamina = messi.Stamina - 40;
+            messi.dx = 20;
+
         }
 
         if (e.getKeyCode() == 87) {
@@ -464,8 +470,15 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
         System.out.println(e.getKeyCode());
 
         if (e.getKeyCode() == 16) {
-            System.out.println("Ronaldo Sprinting");
-            ronaldo.isSprint = false;
+            System.out.println("Ronaldo not Sprinting");
+            ronaldo.isSprinting = false;
+
+        }
+
+        if (e.getKeyCode() == 16) {
+            System.out.println("Messi not Sprinting");
+            messi.isSprinting = false;
+
         }
 
         if (e.getKeyCode() == 87) {
