@@ -175,7 +175,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
             System.out.println("KICK");
             bally.dx = messi.dx;
             bally.dy = messi.dy;
-            messi.dx = messi.dx -1;
+            messi.dx = messi.dx -2;
             messi.dy = messi.dy -1;
 
 
