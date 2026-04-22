@@ -54,6 +54,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
     public Image Messiwin;
     public Image Ronaldowin;
 
+
+
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Ball bally;         //different objects
@@ -175,7 +177,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
             System.out.println("KICK");
             bally.dx = messi.dx;
             bally.dy = messi.dy;
-            messi.dx = messi.dx -2;
+            messi.dx = messi.dx -1;
             messi.dy = messi.dy -1;
 
 
@@ -416,16 +418,27 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
 
         if (e.getKeyCode() == 16) {
             System.out.println("Ronaldo Sprinting");
-            ronaldo.isSprinting = true;
-            ronaldo.Stamina = ronaldo.Stamina - 40;
-            ronaldo.dx = 20;
+
+           long currentTime = System.currentTimeMillis();
+
+            if (currentTime - ronaldo.lastSprintTime > ronaldo.sprintCooldown
+                    && ronaldo.Stamina > 20) {
+
+                ronaldo.isSprinting = true;
+                ronaldo.lastSprintTime = currentTime;
+            }
 
         }
         if (e.getKeyCode() == 18) {
             System.out.println("Messi Sprinting");
+            long currentTime = System.currentTimeMillis();
             messi.isSprinting = true;
-            messi.Stamina = messi.Stamina - 40;
-            messi.dx = 20;
+            if (currentTime - messi.lastSprintTime > messi.sprintCooldown
+                    && messi.Stamina > 20) {
+
+                messi.isSprinting = true;
+                messi.lastSprintTime = currentTime;
+            }
 
 
         }

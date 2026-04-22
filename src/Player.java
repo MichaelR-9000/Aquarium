@@ -19,8 +19,15 @@ public class Player {
     public boolean isLeft;
     public boolean ishuge;
     public boolean istiny;
+
     public int Stamina;
     public boolean isSprinting;
+    public long lastSprintTime = 0;
+    public long sprintCooldown = 2000; // 2 seconds cooldown
+    public long sprintDuration = 500; //max sprint time (0.5 sec)
+
+    public int maxStamina = 140;
+    public long lastRegenTime = 0;
 
     int randx = (int) (Math.random() * 10) + 1;
     int randy = (int) (Math.random() * 10) - 3;
