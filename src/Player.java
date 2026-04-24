@@ -110,6 +110,16 @@ public class Player {
 
             }
 
+            if (isSprinting == true && Stamina > 0){
+               Stamina -= 2; //drains faster while sprinting
+            } else {
+                if (Stamina < maxStamina -10){
+                    Stamina += 1; //regen when not sprinting
+                }
+            }
+
+
+
 
             xpos = xpos + dx;
             ypos = ypos + dy;
