@@ -117,8 +117,16 @@ public class Player {
                     Stamina += 1; //regen when not sprinting
                 }
             }
+            //stop sprint if empty
+            if (Stamina <= 0) {
+                Stamina = 0;
+                isSprinting = false;
+            }
 
+            if(Stamina>maxStamina){
+                Stamina = maxStamina;
 
+            }
 
 
             xpos = xpos + dx;

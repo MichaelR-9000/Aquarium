@@ -54,6 +54,10 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
     public Image Messiwin;
     public Image Ronaldowin;
 
+    //start screen
+    boolean gameStarted = false;
+
+    Rectangle startButton = new Rectangle(400,300,200,80);
 
 
    //Declare the objects used in the program
@@ -121,8 +125,10 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
 
       //for the moment we will loop things forever.
 		while (true) {
-
-         moveThings();  //move all the game objects
+            if(gameStarted){
+                moveThings();
+            }
+            //move all the game objects
          render();  // paint the graphics
          pause(20); // sleep for 10 ms
 		}
@@ -142,6 +148,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
         redcard();
         ronaldo.scale();
         messi.scale();
+        refBallReset();
 
 
 
@@ -258,6 +265,21 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
 
 
     }
+
+    public void refBallReset(){
+        if(ref.hitbox.intersects(bally.hitbox)){
+
+            //reset ball to center
+            bally.xpos = WIDTH/2-bally.width/2;
+            bally.ypos = HEIGHT/2-bally.height/2;
+
+            //stops ball movement
+            bally.dx=0;
+            bally.dy=0;
+            System.out.println("ball reset by ref");
+        }
+    }
+
 //code for win screen Messi
     public void win(){
         if (bally.scoreright>2){
@@ -369,12 +391,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
         g.drawString("Messi:" + bally.scoreright, 10, 55);
 
         //make stamina bars
-
-
-
-
-
-            //Ronaldo Stamina
+        //Ronaldo Stamina
             g.setColor(Color.white);
             g.fillRect(60, 640, 140, 30);
             g.setColor(Color.red);
@@ -386,10 +403,30 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
             g.setColor(Color.red);
             g.fillRect(825, 647, messi.Stamina, 20);
 
+//start screen
+        if (!gameStarted){
+
+            //background
+            g.setColor(Color.GREEN);
+            g.fillRect(0,0,WIDTH,HEIGHT);
+            //title
+            g.setColor(Color.white);
+            g.setFont(new Font("Algerian",Font.BOLD,50));
+            g.drawString("RONALDO VS MESSI",200,200);
+
+            //start button
+            g.setColor(Color.black);
+            g.fillRect(startButton.x, startButton.y, startButton.width, startButton.height);
+            g.setColor(Color.white);
+            g.setFont(new Font("Algerian", Font.BOLD,30));
+            g.drawString("Start", startButton.x+50, startButton.y+50);
+
+        }
+
 
             g.dispose();
-
             bufferStrategy.show();
+            return;
 
     }
     public void keyPressed(KeyEvent e) {
@@ -535,6 +572,13 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
+        int mx = e.getX();
+        int my = e.getY();
+
+        if(!gameStarted && startButton.contains(mx,my)) {
+            gameStarted = true;
+            System.out.println("Game Started!!!");
+        }
 
 
     }
