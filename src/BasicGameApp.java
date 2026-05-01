@@ -63,10 +63,12 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Ball bally;         //different objects
-    private Player ronaldo;
-    private Player messi;
+
     private Referee ref;
 
+private Player[] players;
+    private Player ronaldo;
+   private  Player messi;
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -97,10 +99,10 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
         bally = new Ball(483,317);
 //Creates Ronaldo
         ronaldopic = Toolkit.getDefaultToolkit().getImage("Ronaldo.jpg");
-		ronaldo = new Player(383,300);
+
 //Creates Messi
         messipic = Toolkit.getDefaultToolkit().getImage("Messi.jpeg");
-        messi = new Player(583,300);
+
         //background
         Background = Toolkit.getDefaultToolkit().getImage("Soccerfield.jpeg");
         //referee
@@ -110,6 +112,13 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
         Ronaldowin = Toolkit.getDefaultToolkit().getImage("RONALDOWIN.jpg");
         //win screens for ronaldo and messi
 
+        players = new Player[2];
+
+        players[0] = new Player (383,300); //ronaldo
+        players[1] = new Player (583,300); //messi
+
+        ronaldo = players[0];
+        messi = players[1];
 
 	}// BasicGameApp()
 
@@ -139,15 +148,16 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
 	{
       //calls the move( ) code in the objects
 		bally.move();
-        ronaldo.move();
-        messi.move();
+
+        for(Player p : players){
+            p.move();
+            p.scale();
+        }
         ref.move();
         Kicking();
         tackle();
         win();
         redcard();
-        ronaldo.scale();
-        messi.scale();
         refBallReset();
 
 
@@ -155,7 +165,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
 	}
 
     public void Kicking() {
-
+        Player ronaldo = players[0];
         //if ball hits player. Ball gains the player's direction and gains speed, player loses speed
         if (bally.hitbox.intersects(ronaldo.hitbox) &&  ronaldo.iskicking == false) {
 
@@ -176,7 +186,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
                 ronaldo.iskicking = false;
 
             }//ronaldo kicking ball
-
+        Player messi = players[0];
         if (bally.hitbox.intersects(messi.hitbox) && messi.iskicking == false) {        //messi kicking ball
 
             messi.iskicking = true;
@@ -364,12 +374,40 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
 	private void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.clearRect(0, 0, WIDTH, HEIGHT);
+        //start screen
+        if (!gameStarted){
+
+            //background
+            g.setColor(Color.GREEN);
+            g.fillRect(0,0,WIDTH,HEIGHT);
+            //title
+            g.setColor(Color.white);
+            g.setFont(new Font("Algerian",Font.BOLD,50));
+            g.drawString("RONALDO VS MESSI",200,200);
+
+            //start button
+            g.setColor(Color.black);
+            g.fillRect(startButton.x, startButton.y, startButton.width, startButton.height);
+            g.setColor(Color.white);
+            g.setFont(new Font("Algerian", Font.BOLD,30));
+            g.drawString("Start", startButton.x+50, startButton.y+50);
+            g.dispose();
+            bufferStrategy.show();
+            return;
+
+        }
 
         //draw the image of the field
         g.drawImage(Background, 0, 0, WIDTH, HEIGHT, null);
         g.drawImage(ballPic, bally.xpos, bally.ypos, bally.width, bally.height, null);
-        g.drawImage(ronaldopic, ronaldo.xpos, ronaldo.ypos, ronaldo.width, ronaldo.height, null);
-        g.drawImage(messipic, messi.xpos, messi.ypos, messi.width, messi.height, null);
+
+        Image[] playerImages = {ronaldopic, messipic};
+
+        for(int i = 0; i <players.length; i++){
+            Player p = players[i];
+            g.drawImage(playerImages[i], p.xpos, p.ypos, p.width,p.height,null);
+        }
+
         g.drawImage(refpic, ref.xpos, ref.ypos, 75, 75, null);
         if (bally.isrightwin == true) {  //makes win screen for messi victory
             g.drawImage(messipic, 0, 0, WIDTH, HEIGHT, null);
@@ -403,30 +441,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
             g.setColor(Color.red);
             g.fillRect(825, 647, messi.Stamina, 20);
 
-//start screen
-        if (!gameStarted){
-
-            //background
-            g.setColor(Color.GREEN);
-            g.fillRect(0,0,WIDTH,HEIGHT);
-            //title
-            g.setColor(Color.white);
-            g.setFont(new Font("Algerian",Font.BOLD,50));
-            g.drawString("RONALDO VS MESSI",200,200);
-
-            //start button
-            g.setColor(Color.black);
-            g.fillRect(startButton.x, startButton.y, startButton.width, startButton.height);
-            g.setColor(Color.white);
-            g.setFont(new Font("Algerian", Font.BOLD,30));
-            g.drawString("Start", startButton.x+50, startButton.y+50);
-
-        }
-
-
             g.dispose();
             bufferStrategy.show();
-            return;
 
     }
     public void keyPressed(KeyEvent e) {
@@ -521,11 +537,6 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
     public void keyReleased(KeyEvent e) { // Stop character movement
         System.out.println(e.getKeyCode());
 
-        if (e.getKeyCode() == 16) {
-            System.out.println("Ronaldo not Sprinting");
-            ronaldo.isSprinting = false;
-
-        }
 
         if (e.getKeyCode() == 16) {
             System.out.println("Messi not Sprinting");
