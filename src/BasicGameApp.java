@@ -53,6 +53,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener{
     public Image refpic;
     public Image Messiwin;
     public Image Ronaldowin;
+    public Image Startpic;
 
     //start screen
     boolean gameStarted = false;
@@ -108,9 +109,24 @@ private Player[] players;
         //referee
         refpic = Toolkit.getDefaultToolkit().getImage("Ref.jpeg");
         ref = new Referee(300,300);
-        Messiwin = Toolkit.getDefaultToolkit().getImage("MESSIWIN.jpg");
-        Ronaldowin = Toolkit.getDefaultToolkit().getImage("RONALDOWIN.jpg");
+
+        int randw = (int) (Math.random() * 2) + 1;
+        if (randw==1) {
+            Messiwin = Toolkit.getDefaultToolkit().getImage("MESSIWIN.jpg");
+        }
+        if(randw==2){
+            Messiwin = Toolkit.getDefaultToolkit().getImage("messi2.jpg");
+        }
+        int randv = (int) (Math.random() * 2) + 1;
+        if(randv==1) {
+            Ronaldowin = Toolkit.getDefaultToolkit().getImage("RONALDOWIN.jpg");
+        }
+        if (randv==2){
+            Ronaldowin = Toolkit.getDefaultToolkit().getImage("ronaldo2.jpg");
+        }
         //win screens for ronaldo and messi
+        //start screen image
+        Startpic = Toolkit.getDefaultToolkit().getImage("ronaldovmessi.jpeg");
 
         players = new Player[2];
 
@@ -378,8 +394,8 @@ private Player[] players;
         if (!gameStarted){
 
             //background
-            g.setColor(Color.GREEN);
-            g.fillRect(0,0,WIDTH,HEIGHT);
+            g.drawImage(Startpic,0,0,WIDTH,HEIGHT, null);
+
             //title
             g.setColor(Color.white);
             g.setFont(new Font("Algerian",Font.BOLD,50));
@@ -390,7 +406,7 @@ private Player[] players;
             g.fillRect(startButton.x, startButton.y, startButton.width, startButton.height);
             g.setColor(Color.white);
             g.setFont(new Font("Algerian", Font.BOLD,30));
-            g.drawString("Start", startButton.x+50, startButton.y+50);
+            g.drawString("Start", startButton.x+60, startButton.y+50);
             g.dispose();
             bufferStrategy.show();
             return;
@@ -410,13 +426,13 @@ private Player[] players;
 
         g.drawImage(refpic, ref.xpos, ref.ypos, 75, 75, null);
         if (bally.isrightwin == true) {  //makes win screen for messi victory
-            g.drawImage(messipic, 0, 0, WIDTH, HEIGHT, null);
+            g.drawImage(Messiwin, 0, 0, WIDTH, HEIGHT, null);
             g.fillRect(10, 20, 90, 40);
             g.setColor(Color.red);
             g.drawString("MESSI WINS", 10, 35);
         }
         if (bally.isleftwin == true) {  //makes win screen for Ronaldo victory
-            g.drawImage(ronaldopic, 0, 0, WIDTH, HEIGHT, null);
+            g.drawImage( Ronaldowin, 0, 0, WIDTH, HEIGHT, null);
             g.fillRect(10, 20, 90, 40);
             g.setColor(Color.red);
             g.drawString("RONALDO WINS", 10, 35);
