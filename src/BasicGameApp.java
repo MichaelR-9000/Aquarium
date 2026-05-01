@@ -186,7 +186,7 @@ private Player[] players;
                 ronaldo.iskicking = false;
 
             }//ronaldo kicking ball
-        Player messi = players[0];
+        Player messi = players[1];
         if (bally.hitbox.intersects(messi.hitbox) && messi.iskicking == false) {        //messi kicking ball
 
             messi.iskicking = true;
